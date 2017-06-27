@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.cisdom.mapper.Login" >
+
+
+ <select id="selectUserByID" parameterType="String" resultType="String">
+        select  u_mima from user where u_name = #{name} 
+    </select>
+<insert id="insertUser" parameterType="cn.cisdom.pojo.Name" >
+      
+        insert into user (u_name,u_mima,u_shoujihao,u_zhuzhi,u_zhuce_shijian) values(#{user},#{mima},#{shoujihao},#{zhuzhi},now())
+    </insert>
+
+</mapper>
