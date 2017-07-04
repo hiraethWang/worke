@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.cisdom.mapper.ChuKuMapper">
+  <resultMap id="BaseResultMap" type="cn.cisdom.pojo.ChuKu">
+    <id column="c_chuku_id" jdbcType="INTEGER" property="cChukuId" />
+    <result column="c_chuku_wupinming" jdbcType="VARCHAR" property="cChukuWupinming" />
+    <result column="c_chuku_shuxing" jdbcType="VARCHAR" property="cChukuShuxing" />
+    <result column="c_chuku_shuliang" jdbcType="VARCHAR" property="cChukuShuliang" />
+    <result column="c_chuku_shijian" jdbcType="TIMESTAMP" property="cChukuShijian" />
+    <result column="c_chuku_chukuid" jdbcType="INTEGER" property="cChukuChukuid" />
+    <result column="c_chuku_kuwei" jdbcType="VARCHAR" property="cChukuKuwei" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    c_chuku_id, c_chuku_wupinming, c_chuku_shuxing, c_chuku_shuliang, c_chuku_shijian, 
+    c_chuku_chukuid, c_chuku_kuwei
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from chuku
+    where c_chuku_id = #{cChukuId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from chuku
+    where c_chuku_id = #{cChukuId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="cn.cisdom.pojo.ChuKu">
+    insert into chuku (c_chuku_id, c_chuku_wupinming, c_chuku_shuxing, 
+      c_chuku_shuliang, c_chuku_shijian, c_chuku_chukuid, 
+      c_chuku_kuwei)
+    values (#{cChukuId,jdbcType=INTEGER}, #{cChukuWupinming,jdbcType=VARCHAR}, #{cChukuShuxing,jdbcType=VARCHAR}, 
+      #{cChukuShuliang,jdbcType=VARCHAR}, #{cChukuShijian,jdbcType=TIMESTAMP}, #{cChukuChukuid,jdbcType=INTEGER}, 
+      #{cChukuKuwei,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="cn.cisdom.pojo.ChuKu">
+    insert into chuku
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="cChukuId != null">
+        c_chuku_id,
+      </if>
+      <if test="cChukuWupinming != null">
+        c_chuku_wupinming,
+      </if>
+      <if test="cChukuShuxing != null">
+        c_chuku_shuxing,
+      </if>
+      <if test="cChukuShuliang != null">
+        c_chuku_shuliang,
+      </if>
+      <if test="cChukuShijian != null">
+        c_chuku_shijian,
+      </if>
+      <if test="cChukuChukuid != null">
+        c_chuku_chukuid,
+      </if>
+      <if test="cChukuKuwei != null">
+        c_chuku_kuwei,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="cChukuId != null">
+        #{cChukuId,jdbcType=INTEGER},
+      </if>
+      <if test="cChukuWupinming != null">
+        #{cChukuWupinming,jdbcType=VARCHAR},
+      </if>
+      <if test="cChukuShuxing != null">
+        #{cChukuShuxing,jdbcType=VARCHAR},
+      </if>
+      <if test="cChukuShuliang != null">
+        #{cChukuShuliang,jdbcType=VARCHAR},
+      </if>
+      <if test="cChukuShijian != null">
+        #{cChukuShijian,jdbcType=TIMESTAMP},
+      </if>
+      <if test="cChukuChukuid != null">
+        #{cChukuChukuid,jdbcType=INTEGER},
+      </if>
+      <if test="cChukuKuwei != null">
+        #{cChukuKuwei,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.cisdom.pojo.ChuKu">
+    update chuku
+    <set>
+      <if test="cChukuWupinming != null">
+        c_chuku_wupinming = #{cChukuWupinming,jdbcType=VARCHAR},
+      </if>
+      <if test="cChukuShuxing != null">
+        c_chuku_shuxing = #{cChukuShuxing,jdbcType=VARCHAR},
+      </if>
+      <if test="cChukuShuliang != null">
+        c_chuku_shuliang = #{cChukuShuliang,jdbcType=VARCHAR},
+      </if>
+      <if test="cChukuShijian != null">
+        c_chuku_shijian = #{cChukuShijian,jdbcType=TIMESTAMP},
+      </if>
+      <if test="cChukuChukuid != null">
+        c_chuku_chukuid = #{cChukuChukuid,jdbcType=INTEGER},
+      </if>
+      <if test="cChukuKuwei != null">
+        c_chuku_kuwei = #{cChukuKuwei,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where c_chuku_id = #{cChukuId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.cisdom.pojo.ChuKu">
+    update chuku
+    set c_chuku_wupinming = #{cChukuWupinming,jdbcType=VARCHAR},
+      c_chuku_shuxing = #{cChukuShuxing,jdbcType=VARCHAR},
+      c_chuku_shuliang = #{cChukuShuliang,jdbcType=VARCHAR},
+      c_chuku_shijian = #{cChukuShijian,jdbcType=TIMESTAMP},
+      c_chuku_chukuid = #{cChukuChukuid,jdbcType=INTEGER},
+      c_chuku_kuwei = #{cChukuKuwei,jdbcType=VARCHAR}
+    where c_chuku_id = #{cChukuId,jdbcType=INTEGER}
+  </update>
+</mapper>

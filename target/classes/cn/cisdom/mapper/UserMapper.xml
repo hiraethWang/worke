@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.cisdom.mapper.UserMapper">
+  <resultMap id="BaseResultMap" type="cn.cisdom.pojo.User">
+    <id column="u_id" jdbcType="INTEGER" property="uId" />
+    <result column="u_name" jdbcType="VARCHAR" property="uName" />
+    <result column="u_mima" jdbcType="VARCHAR" property="uMima" />
+    <result column="u_shoujihao" jdbcType="VARCHAR" property="uShoujihao" />
+    <result column="u_zhuzhi" jdbcType="VARCHAR" property="uZhuzhi" />
+    <result column="u_zhiwei" jdbcType="INTEGER" property="uZhiwei" />
+    <result column="u_zhuce_shijian" jdbcType="TIMESTAMP" property="uZhuceShijian" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    u_id, u_name, u_mima, u_shoujihao, u_zhuzhi, u_zhiwei, u_zhuce_shijian
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from user
+    where u_id = #{uId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from user
+    where u_id = #{uId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="cn.cisdom.pojo.User">
+    insert into user (u_id, u_name, u_mima, 
+      u_shoujihao, u_zhuzhi, u_zhiwei, 
+      u_zhuce_shijian)
+    values (#{uId,jdbcType=INTEGER}, #{uName,jdbcType=VARCHAR}, #{uMima,jdbcType=VARCHAR}, 
+      #{uShoujihao,jdbcType=VARCHAR}, #{uZhuzhi,jdbcType=VARCHAR}, #{uZhiwei,jdbcType=INTEGER}, 
+      #{uZhuceShijian,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="cn.cisdom.pojo.User">
+    insert into user
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="uId != null">
+        u_id,
+      </if>
+      <if test="uName != null">
+        u_name,
+      </if>
+      <if test="uMima != null">
+        u_mima,
+      </if>
+      <if test="uShoujihao != null">
+        u_shoujihao,
+      </if>
+      <if test="uZhuzhi != null">
+        u_zhuzhi,
+      </if>
+      <if test="uZhiwei != null">
+        u_zhiwei,
+      </if>
+      <if test="uZhuceShijian != null">
+        u_zhuce_shijian,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="uId != null">
+        #{uId,jdbcType=INTEGER},
+      </if>
+      <if test="uName != null">
+        #{uName,jdbcType=VARCHAR},
+      </if>
+      <if test="uMima != null">
+        #{uMima,jdbcType=VARCHAR},
+      </if>
+      <if test="uShoujihao != null">
+        #{uShoujihao,jdbcType=VARCHAR},
+      </if>
+      <if test="uZhuzhi != null">
+        #{uZhuzhi,jdbcType=VARCHAR},
+      </if>
+      <if test="uZhiwei != null">
+        #{uZhiwei,jdbcType=INTEGER},
+      </if>
+      <if test="uZhuceShijian != null">
+        #{uZhuceShijian,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.cisdom.pojo.User">
+    update user
+    <set>
+      <if test="uName != null">
+        u_name = #{uName,jdbcType=VARCHAR},
+      </if>
+      <if test="uMima != null">
+        u_mima = #{uMima,jdbcType=VARCHAR},
+      </if>
+      <if test="uShoujihao != null">
+        u_shoujihao = #{uShoujihao,jdbcType=VARCHAR},
+      </if>
+      <if test="uZhuzhi != null">
+        u_zhuzhi = #{uZhuzhi,jdbcType=VARCHAR},
+      </if>
+      <if test="uZhiwei != null">
+        u_zhiwei = #{uZhiwei,jdbcType=INTEGER},
+      </if>
+      <if test="uZhuceShijian != null">
+        u_zhuce_shijian = #{uZhuceShijian,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where u_id = #{uId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.cisdom.pojo.User">
+    update user
+    set u_name = #{uName,jdbcType=VARCHAR},
+      u_mima = #{uMima,jdbcType=VARCHAR},
+      u_shoujihao = #{uShoujihao,jdbcType=VARCHAR},
+      u_zhuzhi = #{uZhuzhi,jdbcType=VARCHAR},
+      u_zhiwei = #{uZhiwei,jdbcType=INTEGER},
+      u_zhuce_shijian = #{uZhuceShijian,jdbcType=TIMESTAMP}
+    where u_id = #{uId,jdbcType=INTEGER}
+  </update>
+</mapper>

@@ -3,6 +3,9 @@ package cn.cisdom.controller;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -23,8 +26,26 @@ public class NameController {
 	
 	@ResponseBody
 	@RequestMapping(value="/Login")//接口的URL
-	public Object  getItemParamList(@RequestParam("user") String user,@RequestParam("password") String password,	@RequestParam(value ="callbackparam",required=false) String e ) throws Exception{
-	
+	public Object  getItemParamList(@RequestParam("user") String user,@RequestParam("password") String password,	@RequestParam(value ="callbackparam",required=false) String e ,HttpServletRequest request) throws Exception{
+		//获取登录IP
+		String saveIp ;
+		String ip = request.getHeader("X-Real-IP");
+		if (!StringUtils.isBlank(ip) && !"unknown".equalsIgnoreCase(ip)) {
+			saveIp= ip;
+		}
+		ip = request.getHeader("X-Forwarded-For");
+		if (!StringUtils.isBlank(ip) && !"unknown".equalsIgnoreCase(ip)) {
+		// 多次反向代理后会有多个IP值，第一个为真实IP。
+		int index = ip.indexOf(',');
+		if (index != -1) {
+			saveIp = ip.substring(0, index);
+		} else {
+			saveIp = ip;
+		}
+		} else {
+			saveIp = request.getRemoteAddr();
+		}
+		
 	String password1 =nameService.selectUserByID(user);
 	String message = "";
 	int res ;
@@ -47,7 +68,7 @@ public class NameController {
 		String a= nameService.selectUserByID(user);
 		map.put("res", res);
 		map.put("msg", message);
-		 System.out .print("王王王王王王王王王王王王王王王王王王王");
+	map.put("ip", saveIp);
 		if (e==null){
 			return  map;	
 		}else{

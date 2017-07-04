@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.cisdom.mapper.ShuXingMapper">
+  <resultMap id="BaseResultMap" type="cn.cisdom.pojo.ShuXing">
+    <id column="w_id" jdbcType="INTEGER" property="wId" />
+    <result column="w_wupin_name" jdbcType="VARCHAR" property="wWupinName" />
+    <result column="w_wupin_shuxing" jdbcType="VARCHAR" property="wWupinShuxing" />
+    <result column="w_wupin_xinghao" jdbcType="VARCHAR" property="wWupinXinghao" />
+    <result column="w_wuoin_tuan" jdbcType="VARCHAR" property="wWuoinTuan" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    w_id, w_wupin_name, w_wupin_shuxing, w_wupin_xinghao, w_wuoin_tuan
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from shuxing
+    where w_id = #{wId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from shuxing
+    where w_id = #{wId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="cn.cisdom.pojo.ShuXing">
+    insert into shuxing (w_id, w_wupin_name, w_wupin_shuxing, 
+      w_wupin_xinghao, w_wuoin_tuan)
+    values (#{wId,jdbcType=INTEGER}, #{wWupinName,jdbcType=VARCHAR}, #{wWupinShuxing,jdbcType=VARCHAR}, 
+      #{wWupinXinghao,jdbcType=VARCHAR}, #{wWuoinTuan,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="cn.cisdom.pojo.ShuXing">
+    insert into shuxing
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="wId != null">
+        w_id,
+      </if>
+      <if test="wWupinName != null">
+        w_wupin_name,
+      </if>
+      <if test="wWupinShuxing != null">
+        w_wupin_shuxing,
+      </if>
+      <if test="wWupinXinghao != null">
+        w_wupin_xinghao,
+      </if>
+      <if test="wWuoinTuan != null">
+        w_wuoin_tuan,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="wId != null">
+        #{wId,jdbcType=INTEGER},
+      </if>
+      <if test="wWupinName != null">
+        #{wWupinName,jdbcType=VARCHAR},
+      </if>
+      <if test="wWupinShuxing != null">
+        #{wWupinShuxing,jdbcType=VARCHAR},
+      </if>
+      <if test="wWupinXinghao != null">
+        #{wWupinXinghao,jdbcType=VARCHAR},
+      </if>
+      <if test="wWuoinTuan != null">
+        #{wWuoinTuan,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.cisdom.pojo.ShuXing">
+    update shuxing
+    <set>
+      <if test="wWupinName != null">
+        w_wupin_name = #{wWupinName,jdbcType=VARCHAR},
+      </if>
+      <if test="wWupinShuxing != null">
+        w_wupin_shuxing = #{wWupinShuxing,jdbcType=VARCHAR},
+      </if>
+      <if test="wWupinXinghao != null">
+        w_wupin_xinghao = #{wWupinXinghao,jdbcType=VARCHAR},
+      </if>
+      <if test="wWuoinTuan != null">
+        w_wuoin_tuan = #{wWuoinTuan,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where w_id = #{wId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.cisdom.pojo.ShuXing">
+    update shuxing
+    set w_wupin_name = #{wWupinName,jdbcType=VARCHAR},
+      w_wupin_shuxing = #{wWupinShuxing,jdbcType=VARCHAR},
+      w_wupin_xinghao = #{wWupinXinghao,jdbcType=VARCHAR},
+      w_wuoin_tuan = #{wWuoinTuan,jdbcType=VARCHAR}
+    where w_id = #{wId,jdbcType=INTEGER}
+  </update>
+</mapper>
